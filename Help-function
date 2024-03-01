@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# Variables
+host_name="$(echo ${HOSTNAME%%.*})"
+sof_ver="Version 1.0"
+
+G_flag () {
+    clear
+    echo -e "License Notification: \n"
+    echo -e "~This is where your license information will go~\n"
+}
+
+V_flag () {
+    clear
+    echo -e "Software version: \n"
+    echo -e "sof_ver\n\n\n"
+}
+
+L_flag () {
+    clear
+    .log 0 "Emergent"
+    .log 1 "Alert"
+    .log 2 "Critical"
+    .log 3 "Error"
+    .log 4 "Warning"
+    .log 5 "Notice"
+    .log 6 "Info"
+    .log 7 "Debug"
+}
+
+# Help function
+Help_flag () {
+    clear
+    echo -e "Options:\n"
+    echo -e "h Print this help message\n"
+    echo -e "g License notification\n"
+    echo -e "V Software Version (Upper Case)\n"
+    echo -e "v Verbose Mode (Lower Case\n"
+    echo -e "L Logging Levels\n\n\n"
+}
+
+# Options
+while getopts ":hgVL" option; do
+    case $option in
+        h) #Help
+            Help_flag
+            exit;;
+        g) #License
+            G_flag
+            exit;;
+        V) #Version (Upper Case)
+            V_flag
+            exit;;
+        v) #Verbose (Lower Case)
+            v_flag
+            exit;;
+        L) #Logging
+            L_flag
+            exit;;
+        \?) # Invalid Option
+            echo -e "Error: Invalid Option\n\n"
+            echo "Use -h for Help"
+            exit;;
+    esac
+done
