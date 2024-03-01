@@ -1,0 +1,16 @@
+# Variables
+host_name="$(echo ${HOSTNAME%%.*})"
+
+# Logging function
+__VERBOSE=6
+
+declare -A LOG_LEVELS
+#https://en.wikipedia.org/wiki/Syslog#Severity_level
+LOG_LEVELS=([0]="emerg" [1]="alert" [2]="crit" [3]="err" [4]="warning" [5]="notice" [6]"info" [7]="debug")
+function .log () {
+    local LEVEL=${1}
+    shift
+    if [ ${__VERBOSE} -ge ${LEVEL} ]; then
+        echo "$date $USER:$host_name ~anyname~[$$]: [${LOG_LEVELS[$LEVEL]}]" "$@"
+    fi
+}
