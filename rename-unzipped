@@ -1,0 +1,14 @@
+#!/bin/bash
+
+file_new () {
+    for f in /path/containing/files/
+    do
+        if [ -f "$f" ]; then
+            new_file="$(date +d-%m-%Y_newfilename.ext)"
+            echo -e "unzipping File: $f...\n"
+            unzip "$f";
+            mv "$(unzip -Z1 $f)" "${f%%.*}$new_file";
+            echo -e "Done unzipping file: $f...\n"
+        fi
+    done
+}
