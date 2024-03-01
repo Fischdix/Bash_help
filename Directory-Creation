@@ -1,0 +1,15 @@
+#!/bin/bash
+
+create_directory () {
+    echo -e "Creating Directory...\n"
+    cd ~/path/to/create/new~
+    new_dir="$(date +%Y%m%d_%H%M%S_"$USER")"
+    if [ -d $new_dir ]; then
+        echo -e "$new_dir already exists"
+        cd ~/path/to/create/~
+    else
+        echo -e "Creating Working Directory: $new_dir...\n"
+        mkdir ~/path/to/create/~
+    fi
+    echo -e "New Directory: $new_dir located in ~/path/to/create/~\n"
+}
